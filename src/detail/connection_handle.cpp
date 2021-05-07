@@ -60,7 +60,10 @@ namespace sqlpp
       {
         mysql_close(mysql);
       }
-
+      void handle_no_cleanup(MYSQL* mysql)
+      {
+        ;
+      }
       connection_handle_t::connection_handle_t(const std::shared_ptr<connection_config>& conf)
           : config(conf), mysql(mysql_init(nullptr), handle_cleanup)
       {
@@ -80,7 +83,10 @@ namespace sqlpp
 
         connect(mysql.get(), *config);
       }
-
+      connection_handle_t::connection_handle_t(MYSQL* pMysql)
+          : config(std::make_shared<mysql::connection_config>()), mysql(pMysql, handle_no_cleanup)
+      {
+      }
       connection_handle_t::~connection_handle_t()
       {
       }

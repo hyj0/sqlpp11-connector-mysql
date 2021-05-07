@@ -141,7 +141,11 @@ namespace sqlpp
         : _handle(new detail::connection_handle_t(config))
     {
     }
+    connection::connection(MYSQL* pMysql)
+        : _handle(new detail::connection_handle_t(pMysql))
+    {
 
+    }
     connection::~connection()
     {
     }

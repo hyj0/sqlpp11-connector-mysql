@@ -27,6 +27,7 @@
 #ifndef SQLPP_MYSQL_CONNECTION_H
 #define SQLPP_MYSQL_CONNECTION_H
 
+#include <mysql.h>
 #include <sqlpp11/connection.h>
 #include <sqlpp11/mysql/bind_result.h>
 #include <sqlpp11/mysql/char_result.h>
@@ -128,6 +129,7 @@ namespace sqlpp
       }
 
       connection(const std::shared_ptr<connection_config>& config);
+      connection(MYSQL* pMysql);
       ~connection();
       connection(const connection&) = delete;
       connection& operator=(const connection&) = delete;

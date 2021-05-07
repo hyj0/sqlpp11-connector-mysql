@@ -39,13 +39,15 @@ namespace sqlpp
     namespace detail
     {
       void handle_cleanup(MYSQL* mysql);
-
+      void handle_no_cleanup(MYSQL* mysql);
       struct connection_handle_t
       {
+
         const std::shared_ptr<connection_config> config;
         std::unique_ptr<MYSQL, void (*)(MYSQL*)> mysql;
 
         connection_handle_t(const std::shared_ptr<connection_config>& config);
+        connection_handle_t(MYSQL* pMysql);
         ~connection_handle_t();
         connection_handle_t(const connection_handle_t&) = delete;
         connection_handle_t(connection_handle_t&&) = delete;
